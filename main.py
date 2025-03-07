@@ -3,6 +3,7 @@ from tkinter import ttk
 
 class Converter:
     def __init__(self):
+        self.distance_type = ""
         combo_list = ["Km", "Miles"]
         window = tk.Tk()
         window.title("Let's convert")
@@ -27,8 +28,28 @@ class Converter:
 
 
         window.mainloop()
-    def convert(self):
-        pass
+
+    def convert(self, something):
+        distance = self.distance_entry.get()
+        value = float(distance) * something
+        self.output(value)
+
     def check_type(self):
-        pass
+        distance_type = self.distance_type_combo.get()
+        if distance_type == "Km":
+            self.distance_type = "Miles"
+            self.convert(0.6213711922)
+        elif distance_type == "Miles":
+            self.distance_type = "Km"
+            self.convert(1.609344)
+
+    def output(self, values):
+        value = round(values,2)
+        output = f"It's {value} {self.distance_type}"
+        self.output_box.config(text=output)
+        self.output_box.update()
+
+
+
+
 Converter()
